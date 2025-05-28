@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "lib": ["ES2015", "DOM"],
+    "outDir": "dist",        // <--- output all compiled files here
+    "rootDir": ".",          // <--- root of your source files
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["*.ts"],       // adjust if your files are in folders
+  "exclude": ["dist"]        // <--- exclude the compiled output
+}
