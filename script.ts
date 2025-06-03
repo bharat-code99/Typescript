@@ -1,5 +1,6 @@
 
 type PizzaType = {
+  id: number,
   name: string,
   price: number
 }
@@ -7,16 +8,16 @@ type PizzaType = {
 type OrderType = {
   id: number,
   pizza: PizzaType,
-  status: string
+  status: "ordered" | "completed"
 }
 
 const menu: PizzaType[] = [
-  {name: "Margherita", price: 10},
-  {name: "Pepperoni", price: 12},
-  {name: "Hawaiian", price: 15},
-  {name: "Vegetarian", price: 10},
-  {name: "BBQ Chicken", price: 12},
-  {name: "Mushroom", price: 15},
+  {id: 1, name: "Margherita", price: 10},
+  {id: 2, name: "Pepperoni", price: 12},
+  {id: 3, name: "Hawaiian", price: 15},
+  {id: 4, name: "Vegetarian", price: 10},
+  {id: 5, name: "BBQ Chicken", price: 12},
+  {id: 6, name: "Mushroom", price: 15},
 ];
 
 let cashInRegister = 100;
@@ -49,13 +50,20 @@ const completeOrder = (id: number) => {
   return orderedPizza;
 }
 
-addnewPizza({name: "Peppy Paneer", price: 10});
-addnewPizza({name: "Farm House", price: 12});
+const getPizzaDetails = (identifier: string | number) => {
+  const foundPizza = menu.find(pizza => pizza.id === identifier || pizza.name === identifier);
+  return foundPizza;
+}
+
+addnewPizza({id: 7, name: "Peppy Paneer", price: 10});
+addnewPizza({id: 8, name: "Farm House", price: 12});
 
 placeOrder("Farm House");
 
 completeOrder(1);
 
-console.log("Menu: ", menu);
-console.log("Cash in register: ", cashInRegister);
-console.log("Order Queue: ", orderQueue);
+// console.log("Menu: ", menu);
+// console.log("Cash in register: ", cashInRegister);
+// console.log("Order Queue: ", orderQueue);
+
+console.log(getPizzaDetails("Mushroom"));
