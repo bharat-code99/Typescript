@@ -11,24 +11,26 @@ type OrderType = {
   status: "ordered" | "completed"
 }
 
+let pizzaId = 1;
+
 const menu: PizzaType[] = [
-  {id: 1, name: "Margherita", price: 10},
-  {id: 2, name: "Pepperoni", price: 12},
-  {id: 3, name: "Hawaiian", price: 15},
-  {id: 4, name: "Vegetarian", price: 10},
-  {id: 5, name: "BBQ Chicken", price: 12},
-  {id: 6, name: "Mushroom", price: 15},
+  {id: pizzaId++, name: "Margherita", price: 10},
+  {id: pizzaId++, name: "Pepperoni", price: 12},
+  {id: pizzaId++, name: "Hawaiian", price: 15},
+  {id: pizzaId++, name: "Vegetarian", price: 10},
+  {id: pizzaId++, name: "BBQ Chicken", price: 12},
+  {id: pizzaId++, name: "Mushroom", price: 15},
 ];
 
 let cashInRegister = 100;
 let orderId = 1;
 const orderQueue: OrderType[] = [];
 
-const addnewPizza = (newPizza: PizzaType) => {
-  menu.push(newPizza);
+const addnewPizza = (newPizza: any): void => {
+  menu.push({id: pizzaId++, ...newPizza});
 }
 
-const placeOrder = (pizzaName: string) => {
+const placeOrder = (pizzaName: string): OrderType | void => {
   const pizzaObj = menu.find(pizza => pizza.name === pizzaName);
   if(!pizzaObj){
     console.log("Pizza Not Found.");
@@ -40,7 +42,7 @@ const placeOrder = (pizzaName: string) => {
   return newOrder;
 }
 
-const completeOrder = (id: number) => {
+const completeOrder = (id: number) : OrderType | void=> {
   const orderedPizza = orderQueue.find(pizza => pizza.id === id);
   if(!orderedPizza){
     console.log("Not Found.");
@@ -62,15 +64,15 @@ export const getPizzaDetails = (identifier: string | number): PizzaType | string
   }
 }
 
-addnewPizza({id: 7, name: "Peppy Paneer", price: 10});
-addnewPizza({id: 8, name: "Farm House", price: 12});
+addnewPizza({name: "Peppy Paneer", price: 10});
+addnewPizza({name: "Farm House", price: 12});
 
 placeOrder("Farm House");
 
 completeOrder(1);
 
-// console.log("Menu: ", menu);
+console.log("Menu: ", menu);
 // console.log("Cash in register: ", cashInRegister);
 // console.log("Order Queue: ", orderQueue);
 
-console.log(getPizzaDetails("Mushroom"));
+// console.log(getPizzaDetails("Mushroom"));
