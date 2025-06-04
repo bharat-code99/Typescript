@@ -1,11 +1,24 @@
-//literal Types
-let myName:"Bharat" = "Bharat";
-const myName2 = "Bharat";
 
 type UserRole = "guest" | "member" | "admin";
 
-let enteredUser = "Admin";
+type User = {
+  userName: string,
+  role: UserRole
+}
 
-let user: UserRole = enteredUser as UserRole;
+const users: User[] = [
+  {userName: "Bharat", role: "admin"},
+  {userName: "Sayam", role: "admin"},
+  {userName: "Sumit", role: "member"},
+  {userName: "Vishal", role: "guest"},
+];
 
-console.log(user);
+const fetchUserDetails = (name: string): User => {
+  const user = users.find(user => user.userName === name);
+  if(!user){
+    throw new Error(`User ${name} not found`);
+  }
+  return user;
+}
+
+console.log(fetchUserDetails("Sumit"));

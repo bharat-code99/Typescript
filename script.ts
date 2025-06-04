@@ -50,9 +50,16 @@ const completeOrder = (id: number) => {
   return orderedPizza;
 }
 
-const getPizzaDetails = (identifier: string | number) => {
-  const foundPizza = menu.find(pizza => pizza.id === identifier || pizza.name === identifier);
-  return foundPizza;
+export const getPizzaDetails = (identifier: string | number): PizzaType | string => {
+  if(typeof identifier === "string"){
+    return menu.find(pizza => pizza.name === identifier) ?? "Not Found";
+  }
+  else if(typeof identifier === "number"){
+    return menu.find(pizza => pizza.id === identifier) ?? "Not Found";
+  }
+  else{
+    throw new TypeError("Parameter `identifier` must be a string or number");
+  }
 }
 
 addnewPizza({id: 7, name: "Peppy Paneer", price: 10});
