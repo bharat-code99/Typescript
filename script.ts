@@ -12,7 +12,9 @@ type OrderType = {
 }
 
 let pizzaId = 1;
-
+let orderId = 1;
+let cashInRegister = 100;
+const orderQueue: OrderType[] = [];
 const menu: PizzaType[] = [
   {id: pizzaId++, name: "Margherita", price: 10},
   {id: pizzaId++, name: "Pepperoni", price: 12},
@@ -22,11 +24,15 @@ const menu: PizzaType[] = [
   {id: pizzaId++, name: "Mushroom", price: 15},
 ];
 
-let cashInRegister = 100;
-let orderId = 1;
-const orderQueue: OrderType[] = [];
+function addToArray<T> (array: T[], item: T): T[]{
+  array.push(item);
+  return array;
+}
 
-const addnewPizza = (newPizza: any): void => {
+console.log(addToArray<PizzaType>(menu, {id: pizzaId++, name: "Peppy Paneer", price: 10}));
+console.log(addToArray<OrderType>(orderQueue, {id: orderId++, pizza: menu[5], status: "completed"}));
+
+const addnewPizza = (newPizza: Omit<PizzaType, "id">): void => {
   menu.push({id: pizzaId++, ...newPizza});
 }
 
@@ -64,15 +70,15 @@ export const getPizzaDetails = (identifier: string | number): PizzaType | string
   }
 }
 
-addnewPizza({name: "Peppy Paneer", price: 10});
-addnewPizza({name: "Farm House", price: 12});
+// addnewPizza({name: "Peppy Paneer", price: 10});
+// addnewPizza({name: "Farm House", price: 12});
 
-placeOrder("Farm House");
+// placeOrder("Farm House");
 
-completeOrder(1);
+// completeOrder(1);
 
-console.log("Menu: ", menu);
+// console.log("Menu: ", menu);
 // console.log("Cash in register: ", cashInRegister);
 // console.log("Order Queue: ", orderQueue);
 
-// console.log(getPizzaDetails("Mushroom"));
+// console.log(getPizzaDetails(4));

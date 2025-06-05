@@ -7,11 +7,13 @@ type User = {
   role: UserRole
 }
 
+let userId: number = 1;
+
 const users: User[] = [
-  {id: 1, userName: "Bharat", role: "admin"},
-  {id: 2, userName: "Sayam", role: "admin"},
-  {id: 3, userName: "Sumit", role: "member"},
-  {id: 4, userName: "Vishal", role: "guest"},
+  {id: userId++, userName: "Bharat", role: "admin"},
+  {id: userId++, userName: "Sayam", role: "admin"},
+  {id: userId++, userName: "Sumit", role: "member"},
+  {id: userId++, userName: "Vishal", role: "guest"},
 ];
 
 const updateUser = (id: number, updates: Partial<User>) => {
@@ -40,4 +42,13 @@ const fetchUserDetails = (identifier: string | number): User | string => {
   }
 }
 
-console.log(fetchUserDetails(3));
+const addNewUser = (newUser: Omit<User, "id">): User => {
+  const user: User = {id: userId++, ...newUser};
+  users.push(user);
+  return user;
+}
+
+console.log(addNewUser({userName: "Nitish", role: "member"}));
+console.log(users);
+
+// console.log(fetchUserDetails(3));
