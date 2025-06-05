@@ -4,7 +4,10 @@ const favouriteThings = ["raindropes on roses", "whiskers on kittens", "bright c
 
 const voters = [{name: "Alice", age: 23}, {name: "Bob", age: 37}];
 
-function getLastItem<T> (array: T[]): T | undefined{
+// Generic
+// In this case <T> is a generic type
+// It acts as an placeholder for a type can be used throught the function
+const getLastItem = <T> (array: T[]): T | undefined => {
   return array[array.length - 1];
 }
 

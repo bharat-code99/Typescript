@@ -5,6 +5,7 @@ type Address = {
   country: string
 }
 
+// Optional Properties add ? after it's name
 type Person = {
   name: string,
   age: number,
@@ -18,6 +19,9 @@ const person1: Person = {
   isStudent: true,
 }
 
+// Optional Properties
+// the optional property may be undefined to add ? before it's name 
+// to tell TypeScript that it is optional when using it
 function displayInfo(person: Person){
   console.log(`${person.name} lives at ${person.address?.street}`);
 }

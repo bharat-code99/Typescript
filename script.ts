@@ -1,10 +1,12 @@
 
+// Custom Type
 type PizzaType = {
   id: number,
   name: string,
   price: number
 }
 
+// Custom Type
 type OrderType = {
   id: number,
   pizza: PizzaType,
@@ -24,7 +26,10 @@ const menu: PizzaType[] = [
   {id: pizzaId++, name: "Mushroom", price: 15},
 ];
 
-function addToArray<T> (array: T[], item: T): T[]{
+// Generics
+// Generic is written before the bracket of the function.
+// Return type is written after the bracket e.g. functionName <Generic>(): return type
+const addToArray = <T>(array: T[], item: T): T[] => {
   array.push(item);
   return array;
 }
@@ -32,10 +37,12 @@ function addToArray<T> (array: T[], item: T): T[]{
 console.log(addToArray<PizzaType>(menu, {id: pizzaId++, name: "Peppy Paneer", price: 10}));
 console.log(addToArray<OrderType>(orderQueue, {id: orderId++, pizza: menu[5], status: "completed"}));
 
+// Utility Type Omit<Custom Type, "property to not include"> Omit the property that is passed as string 
 const addnewPizza = (newPizza: Omit<PizzaType, "id">): void => {
   menu.push({id: pizzaId++, ...newPizza});
 }
 
+// Union of types. Here function will return either OrderaType object or return nothing
 const placeOrder = (pizzaName: string): OrderType | void => {
   const pizzaObj = menu.find(pizza => pizza.name === pizzaName);
   if(!pizzaObj){
@@ -48,6 +55,7 @@ const placeOrder = (pizzaName: string): OrderType | void => {
   return newOrder;
 }
 
+// Union of types
 const completeOrder = (id: number) : OrderType | void=> {
   const orderedPizza = orderQueue.find(pizza => pizza.id === id);
   if(!orderedPizza){
@@ -58,6 +66,9 @@ const completeOrder = (id: number) : OrderType | void=> {
   return orderedPizza;
 }
 
+// Union of types in function's parameters and return types
+// Type Narrowing in the if else clause
+// ?? operator checks left value if it is null or undefined then return the right value
 export const getPizzaDetails = (identifier: string | number): PizzaType | string => {
   if(typeof identifier === "string"){
     return menu.find(pizza => pizza.name === identifier) ?? "Not Found";
@@ -66,6 +77,7 @@ export const getPizzaDetails = (identifier: string | number): PizzaType | string
     return menu.find(pizza => pizza.id === identifier) ?? "Not Found";
   }
   else{
+    // TypeError in TypeScript
     throw new TypeError("Parameter `identifier` must be a string or number");
   }
 }

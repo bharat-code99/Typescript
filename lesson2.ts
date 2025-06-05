@@ -1,4 +1,6 @@
 
+// Unions
+// theri values can not be other than that
 type UserRole = "guest" | "member" | "admin";
 
 type User = {
@@ -16,6 +18,9 @@ const users: User[] = [
   {id: userId++, userName: "Vishal", role: "guest"},
 ];
 
+// Utility Type
+// Partial | It takes a custom type and make every property optional
+// Commonly used when updating an object
 const updateUser = (id: number, updates: Partial<User>) => {
   const foundUser = users.find(user => user.id === id);
   if(!foundUser) {
